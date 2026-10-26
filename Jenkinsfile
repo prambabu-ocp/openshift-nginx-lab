@@ -23,27 +23,8 @@ echo Source files found.
             }
         }
 
-        stage('2. Validate Manifest') {
-    steps {
-        bat '''
-@echo off
-if not exist "%MANIFEST%" (
-    echo ERROR: Manifest not found: %MANIFEST%
-    exit /b 1
-)
-
-"%OC%" create --dry-run=client --validate=false -f "%MANIFEST%" -o yaml >NUL
-if errorlevel 1 (
-    echo ERROR: Manifest could not be parsed.
-    exit /b 1
-)
-
-echo Local manifest parsing passed.
-'''
-    }
-}
-
-        stage('3. Connect to OpenShift') {
+        
+        stage('2. Connect to OpenShift') {
             steps {
                 withCredentials([
                     string(
@@ -66,7 +47,7 @@ if errorlevel 1 exit /b 1
             }
         }
 
-        stage('4. Server-side Validation') {
+        stage('3. Server-side Validation') {
             steps {
                 bat '''
 @echo off
@@ -77,7 +58,7 @@ echo OpenShift server-side validation passed.
             }
         }
 
-        stage('5. Deploy to OpenShift') {
+        stage('4. Deploy to OpenShift') {
             steps {
                 bat '''
 @echo off
@@ -91,7 +72,7 @@ if errorlevel 1 exit /b 1
             }
         }
 
-        stage('6. Verify Deployment') {
+        stage('5. Verify Deployment') {
             steps {
                 bat '''
 @echo off
@@ -114,7 +95,7 @@ if errorlevel 1 exit /b 1
             }
         }
 
-        stage('7. HTTP Smoke Test') {
+        stage('6. HTTP Smoke Test') {
             steps {
                 bat '''
 @echo off
