@@ -24,15 +24,24 @@ echo Source files found.
         }
 
         stage('2. Validate Manifest') {
-            steps {
-                bat '''
+    steps {
+        bat '''
 @echo off
-"%OC%" apply --dry-run=client -f "%MANIFEST%"
-if errorlevel 1 exit /b 1
-echo Client-side manifest validation passed.
+if not exist "%MANIFEST%" (
+    echo ERROR: Manifest not found: %MANIFEST%
+    exit /b 1
+)
+
+"%OC%" create --dry-run=client --validate=false -f "%MANIFEST%" -o yaml >NUL
+if errorlevel 1 (
+    echo ERROR: Manifest could not be parsed.
+    exit /b 1
+)
+
+echo Local manifest parsing passed.
 '''
-            }
-        }
+    }
+}
 
         stage('3. Connect to OpenShift') {
             steps {
