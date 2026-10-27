@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-new
+  labels:
+    app: nginx-new
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-new
+  template:
+    metadata:
+      labels:
+        app: nginx-new
+    spec:
+      containers:
+        - name: nginx-new
+          image: docker.io/bitnami/nginx:latest
+          ports:
+            - name: http
+              containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-new
+spec:
+  selector:
+    app: nginx-new
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: nginx-new
+spec:
+  to:
+    kind: Service
+    name: nginx-new
+  port:
+    targetPort: http
