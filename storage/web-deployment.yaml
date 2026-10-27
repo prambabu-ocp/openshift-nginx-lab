@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: storage-demo
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: storage-demo
+  template:
+    metadata:
+      labels:
+        app: storage-demo
+    spec:
+      containers:
+        - name: web
+          image: registry.access.redhat.com/ubi9/python-312:latest
+          command:
+            - /bin/sh
+            - -c
+            - |
+              mkdir -p /data
+              touch /data/persistence-test.txt
+              python -m http.server 8080 --directory /data
+          ports:
+            - name: http
+              containerPort: 8080
+          volumeMounts:
+            - name: persistent-data
+              mountPath: /data
+      volumes:
+        - name: persistent-data
+          persistentVolumeClaim:
+            claimName: demo-pvc
