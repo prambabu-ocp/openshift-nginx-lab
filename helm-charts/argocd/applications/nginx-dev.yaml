@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-dev
+  namespace: openshift-gitops
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/prambabu-ocp/openshift-nginx-lab.git
+    targetRevision: main
+    path: helm-charts/nginx-chart
+
+    helm:
+      releaseName: nginx-dev
+      valueFiles:
+        - ../environments/dev/values.yaml
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ramu-248-dev
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

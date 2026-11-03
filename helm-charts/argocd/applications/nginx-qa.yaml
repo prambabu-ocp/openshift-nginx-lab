@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-qa
+  namespace: openshift-gitops
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/YOUR-USERNAME/openshift-nginx-lab.git
+    targetRevision: main
+    path: helm-charts/nginx-chart
+
+    helm:
+      releaseName: nginx-qa
+      valueFiles:
+        - ../environments/qa/values.yaml
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nginx-qa
