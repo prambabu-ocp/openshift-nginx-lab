@@ -1,0 +1,18 @@
+environment: QA
+
+replicaCount: 2
+
+pageTitle: "Nginx QA"
+pageMessage: "Welcome to Nginx QA Environment"
+
+image:
+  repository: nginxinc/nginx-unprivileged
+  tag: "1.27-alpine"
+
+resources:
+  requests:
+    cpu: 200m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi

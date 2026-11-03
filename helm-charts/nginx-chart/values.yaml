@@ -1,0 +1,26 @@
+replicaCount: 1
+
+environment: dev
+
+image:
+  repository: nginxinc/nginx-unprivileged
+  tag: "1.27-alpine"
+  pullPolicy: IfNotPresent
+
+service:
+  port: 8080
+  targetPort: 8080
+
+route:
+  enabled: true
+
+pageTitle: "Nginx OpenShift Application"
+pageMessage: "Hello from Nginx"
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi

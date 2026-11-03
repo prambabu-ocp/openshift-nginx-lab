@@ -1,0 +1,18 @@
+environment: PROD
+
+replicaCount: 3
+
+pageTitle: "Nginx PROD"
+pageMessage: "Welcome to Nginx Production Environment"
+
+image:
+  repository: nginxinc/nginx-unprivileged
+  tag: "1.27-alpine"
+
+resources:
+  requests:
+    cpu: 500m
+    memory: 512Mi
+  limits:
+    cpu: 1
+    memory: 1Gi
