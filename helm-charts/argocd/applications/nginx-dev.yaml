@@ -22,5 +22,6 @@ spec:
 
   syncPolicy:
     automated:
-      prune: true
-      selfHeal: true
+      prune: true #prune: true: Resources removed from the desired Git configuration can be deleted during synchronization.
+      selfHeal: true #selfHeal: true: If someone manually changes a managed resource in OpenShift, Argo CD can restore the Git-defined state.
+      

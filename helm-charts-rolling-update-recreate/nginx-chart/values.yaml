@@ -1,0 +1,39 @@
+replicaCount: 1
+
+environment: dev
+
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 25%
+    maxUnavailable: 25%
+
+image:
+  repository: nginxinc/nginx-unprivileged
+  tag: "1.31-alpine"
+  #tag: "1.27-alpine"
+  pullPolicy: IfNotPresent
+
+service:
+  port: 8080
+  targetPort: 8080
+
+route:
+  enabled: true
+
+pageTitle: "Nginx OpenShift Application"
+pageMessage: "Hello from Nginx"
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+serviceAccount:
+  create: false
+
+configMap:
+  enabled: true
