@@ -1,0 +1,16 @@
+environment: DEV
+
+replicaCount: 2
+
+#activeColor: blue
+activeColor: green
+
+blue:
+  imageTag: "1.27-alpine"
+  pageTitle: "NGINX REMO DEV - BLUE"
+  pageMessage: "Hello from DEV BLUE version"
+
+green:
+  imageTag: "1.31-alpine"
+  pageTitle: "NGINX REMO DEV - GREEN"
+  pageMessage: "Hello from DEV GREEN version"

@@ -1,0 +1,164 @@
+{{- $root := . }}
+{{- range $color := list "blue" "green" }}
+{{- $slot := index $root.Values $color }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $root.Release.Name }}-{{ $color }}
+  labels:
+    app.kubernetes.io/instance: {{ $root.Release.Name }}
+    app.kubernetes.io/component: nginx
+    deployment-color: {{ $color }}
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>{{ $slot.pageTitle }}</title>
+
+      <style>
+        * {
+          box-sizing: border-box;
+        }
+
+        body {
+          margin: 0;
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 24px;
+          font-family: Arial, Helvetica, sans-serif;
+          background: {{ if eq $color "blue" }}#eaf3ff{{ else }}#e9f9ef{{ end }};
+          color: #1f2937;
+        }
+
+        .container {
+          width: 100%;
+          max-width: 650px;
+          overflow: hidden;
+          background: #ffffff;
+          border-radius: 18px;
+          box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .header {
+          padding: 35px 25px;
+          text-align: center;
+          color: white;
+          background: {{ if eq $color "blue" }}#1769d2{{ else }}#168344{{ end }};
+        }
+
+        .header h1 {
+          margin: 0;
+          font-size: 30px;
+        }
+
+        .header p {
+          margin: 12px 0 0;
+          font-size: 15px;
+        }
+
+        .content {
+          padding: 30px;
+          text-align: center;
+        }
+
+        .badge {
+          display: inline-block;
+          padding: 10px 24px;
+          border-radius: 30px;
+          color: white;
+          font-weight: bold;
+          letter-spacing: 1px;
+          background: {{ if eq $color "blue" }}#1769d2{{ else }}#168344{{ end }};
+        }
+
+        .message {
+          margin: 25px 0;
+          font-size: 24px;
+          font-weight: bold;
+          color: {{ if eq $color "blue" }}#1769d2{{ else }}#168344{{ end }};
+        }
+
+        .details {
+          padding: 20px;
+          text-align: left;
+          background: #f8fafc;
+          border-radius: 12px;
+          line-height: 2;
+        }
+
+        .details strong {
+          display: inline-block;
+          min-width: 145px;
+        }
+
+        .footer {
+          padding: 18px;
+          text-align: center;
+          font-size: 13px;
+          color: #64748b;
+          border-top: 1px solid #e5e7eb;
+        }
+
+        @media (max-width: 480px) {
+          .header h1 {
+            font-size: 23px;
+          }
+
+          .content {
+            padding: 20px;
+          }
+
+          .message {
+            font-size: 20px;
+          }
+
+          .details strong {
+            min-width: 0;
+          }
+        }
+      </style>
+    </head>
+
+    <body>
+      <div class="container">
+
+        <div class="header">
+          <h1>NGINX REMO</h1>
+          <p>Blue-Green Deployment on OpenShift</p>
+        </div>
+
+        <div class="content">
+
+          <span class="badge">
+            {{ $color | upper }} DEPLOYMENT
+          </span>
+
+          <div class="message">
+            {{ $slot.pageMessage }}
+          </div>
+
+          <div class="details">
+            <div><strong>Environment:</strong> {{ $root.Values.environment }}</div>
+            <div><strong>Application:</strong> Nginx REMO</div>
+            <div><strong>Deployment:</strong> {{ $color | upper }}</div>
+            <div><strong>Image:</strong> {{ $root.Values.image.repository }}:{{ $slot.imageTag }}</div>
+            <div><strong>Platform:</strong> OpenShift</div>
+            <div><strong>Deployment Tool:</strong> Helm</div>
+          </div>
+
+        </div>
+
+        <div class="footer">
+          NGINX REMO | Helm + Git + Argo CD | OpenShift
+        </div>
+
+      </div>
+    </body>
+    </html>
+{{- end }}

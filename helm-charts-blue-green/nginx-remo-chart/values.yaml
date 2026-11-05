@@ -1,0 +1,17 @@
+replicaCount: 2
+
+image:
+  repository: nginxinc/nginx-unprivileged
+  pullPolicy: IfNotPresent
+
+activeColor: blue  ### important
+
+blue:
+  imageTag: "1.27-alpine"
+  pageTitle: "NGINX REMO BLUE"
+  pageMessage: "Hello from BLUE version"
+
+green:
+  imageTag: "1.31-alpine"
+  pageTitle: "NGINX REMO GREEN"
+  pageMessage: "Hello from GREEN version"

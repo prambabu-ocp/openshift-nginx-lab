@@ -1,0 +1,15 @@
+environment: PROD
+
+replicaCount: 3
+
+activeColor: blue
+
+blue:
+  imageTag: "1.31-alpine"
+  pageTitle: "NGINX REMO PROD - BLUE"
+  pageMessage: "Hello from PROD BLUE version"
+
+green:
+  imageTag: "1.32-alpine"
+  pageTitle: "NGINX REMO PROD - GREEN"
+  pageMessage: "Hello from PROD GREEN version"
