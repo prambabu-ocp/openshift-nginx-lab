@@ -24,9 +24,13 @@ spec:
       containers:
         - name: web
 
+<<<<<<< HEAD
           #image: registry.access.redhat.com/ubi9/python-312:latest
           #image: registry.access.redhat.com/ubi9/python-312:1
           image: registry.access.redhat.com/ubi9/python-312:invalid-tag
+=======
+          image: registry.access.redhat.com/ubi9/python-312:latest
+>>>>>>> parent of 793aff7 (Update storage demo Python image)
 
           command:
             - /bin/sh
