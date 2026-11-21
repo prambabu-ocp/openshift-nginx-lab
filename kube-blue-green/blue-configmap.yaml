@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: blue-html
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Blue Application</title>
+      <style>
+        body {
+          background: #1565c0;
+          color: white;
+          font-family: Arial;
+          text-align: center;
+          padding-top: 100px;
+        }
+      </style>
+    </head>
+    <body>
+      <h1>BLUE APPLICATION</h1>
+      <h2>Version 1.0</h2>
+      <p>Traffic is currently served by Blue.</p>
+    </body>
+    </html>
