@@ -24,9 +24,9 @@ spec:
       containers:
         - name: web
 
-          #image: registry.access.redhat.com/ubi9/python-312:latest
+          image: registry.access.redhat.com/ubi9/python-312:latest
           #image: registry.access.redhat.com/ubi9/python-312:1
-          image: registry.access.redhat.com/ubi9/python-312:invalid-tag
+          #image: registry.access.redhat.com/ubi9/python-312:invalid-tag
 
           command:
             - /bin/sh
