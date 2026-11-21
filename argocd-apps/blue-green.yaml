@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/prambabu-ocp/openshift-nginx-lab.git
     targetRevision: main
-    path: blue-green
+    path: kube-blue-green
 
   destination:
     server: https://kubernetes.default.svc
