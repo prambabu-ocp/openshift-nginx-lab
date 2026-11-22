@@ -6,18 +6,25 @@ spec:
   type: ClusterIP
   selector:
     app: blue-green-demo
-    version: blue
+    # version: blue
+    version: green
   ports:
     - name: http
       port: 8080
       targetPort: 80
 
 
+# Currently, the selector is:
+# # selector:
+# #   app: blue-green-demo
+# #   version: blue
+
+# # This selector means the Service sends traffic only to Pods with the labels app: blue-green-demo and version: blue.
+
+# # Later, we'll change version: blue to version: green through Git. That is our traffic-switching operation
+
+
+# Change it to:
 # selector:
 #   app: blue-green-demo
-#   version: blue
-
-# This selector means the Service sends traffic only to Pods with the labels app: blue-green-demo and version: blue.
-
-# Later, we'll change version: blue to version: green through Git. That is our traffic-switching operation
-
+#   version: green
