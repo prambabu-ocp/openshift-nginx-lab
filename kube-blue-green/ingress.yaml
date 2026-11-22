@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: blue-green-ingress
+  namespace: blue-green-demo
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: blue-green.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: blue-green-service
+                port:
+                  number: 8080
