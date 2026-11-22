@@ -6,8 +6,8 @@ spec:
   type: ClusterIP
   selector:
     app: blue-green-demo
-    version: blue
-    #version: green
+    #version: blue
+    version: green
   ports:
     - name: http
       port: 8080
