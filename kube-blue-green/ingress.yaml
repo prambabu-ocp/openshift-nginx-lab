@@ -6,7 +6,8 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - http:
+    - host: blue-green.local
+      http:
         paths:
           - path: /
             pathType: Prefix
@@ -15,6 +16,25 @@ spec:
                 name: blue-green-service
                 port:
                   number: 8080
+
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: blue-green-ingress
+#   namespace: blue-green-demo
+# spec:
+#   ingressClassName: nginx
+#   rules:
+#     - http:
+#         paths:
+#           - path: /
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: blue-green-service
+#                 port:
+#                   number: 8080
 
 # apiVersion: networking.k8s.io/v1
 # kind: Ingress
